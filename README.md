@@ -59,7 +59,7 @@ We standardize all objects that flow between FE ↔ BE ↔ LLM. This reduces mis
 
 * `turnId`: unique per assistant turn, for logging/debug.
 * `focusUnitId`: the unit we are actively tutoring right now.
-* `primaryTargetUnitId`: what the student likely asked about (may differ from focus if prereqs block).
+* `primaryTargetUnitId`: what the student likely asked about.
 * `prereqBlockingUnitId`: missing prereq we must address first (deterministic from DAG).
 * `scopedUnitIds`: small list of units the LLM is allowed to reference/target this turn.
 * `allowedActions`: the only actions the LLM is permitted to output.
