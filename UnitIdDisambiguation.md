@@ -8,7 +8,7 @@ It should NOT be influenced by prereqs.
 
 Why it exists: So you always preserve the student’s intent, even if you can’t address it immediately.
 
-prereqBlockingUnitId
+`prereqBlockingUnitId`
 
 Meaning: The single prerequisite unit (or nearest prerequisite) that deterministically blocks progress on primaryTargetUnitId.
 
@@ -16,19 +16,19 @@ Source: DAG + snapshot mastery state.
 
 Why it exists: To force correct sequencing when the student is trying to jump ahead.
 
-focusUnitId
+`focusUnitId`
 
 Meaning: What we will actually tutor right now.
 
 Source: Deterministic policy computation.
 
-Rule:
+**Rule:**
 
 If prereqBlockingUnitId != null → focusUnitId = prereqBlockingUnitId
 
 Else → focusUnitId = primaryTargetUnitId (or current thread focus if you’re scope-locking)
 
 So:
-primaryTargetUnitId = student intent
-prereqBlockingUnitId = why we can’t go there yet
-focusUnitId = what we do now
+`primaryTargetUnitId` = student intent
+`prereqBlockingUnitId` = why we can’t go there yet
+`focusUnitId` = what we do now
