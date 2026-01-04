@@ -486,17 +486,6 @@ export function drillEvidenceValue(streakCorrect: number): number {
 }
 ```
 
-**Revisit urgency (if next eligible revisit is soon)**
-
-```ts
-export function revisitUrgencyValue(hoursUntilEligible: number | null): number {
-  if (hoursUntilEligible == null) return 0;
-  // within 24h ramps up; if already eligible -> 1
-  if (hoursUntilEligible <= 0) return 1;
-  return Math.max(0, Math.min(1, 1 - (hoursUntilEligible / 24)));
-}
-```
-
 ### Scoring function (weighted sum)
 
 ```ts
@@ -507,23 +496,20 @@ export function computeUnitPriorityScore(x: {
   recencyHours: number;
   masteryTier: 'none'|'bronze'|'silver'|'gold';
   drillStreak: number;
-  revisitHoursUntilEligible: number | null;
 }): number {
   const intent = 0.7 * mappedValue(x.mappedConfidence) + 0.3 * (x.isFocus ? 1 : 0);
   const rec = recencyValue(x.recencyHours);
   const prog = inProgressValue(x.isInProgress);
   const tierNeed = tierNeedValue(x.masteryTier);
   const drillEvd = drillEvidenceValue(x.drillStreak);
-  const revisit = revisitUrgencyValue(x.revisitHoursUntilEligible);
 
   // Weights (tune later)
   const score =
     0.35 * intent +
     0.15 * rec +
-    0.10 * prog +
+    0.15 * prog +
     0.20 * tierNeed +
-    0.10 * drillEvd +
-    0.10 * revisit;
+    0.15 * drillEvd +
 
   return Math.max(0, Math.min(1, score));
 }
