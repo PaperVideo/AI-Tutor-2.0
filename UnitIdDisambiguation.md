@@ -62,7 +62,7 @@ Always include `primaryTargetUnitId` (so the tutor can reference it: “we’re 
 Include prereq chain / neighborhood needed to support the next steps
 
 Example:
-
+```
 scopedUnitIds = unique([
   focusUnitId,
   primaryTargetUnitId,
@@ -70,7 +70,7 @@ scopedUnitIds = unique([
   ...immediatePrereqs(focusUnitId),
   ...smallNeighborhood(focusUnitId)
 ]).slice(0, MAX_SCOPE)
-
+```
 
 Then the LLM constraint is simple:
 
